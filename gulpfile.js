@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     server = require('gulp-webserver'),
     fs = require('fs'),
     path = require('path'),
+    //babel = require('gulp-babel'),
     url = require('url');
 
 // 启动web服务 src
@@ -37,10 +38,21 @@ function serverRun(serverPath){
         }))
 }
 
-//编译sass
+//编译sass 压缩css
 gulp.task('sass', function(){
-    gulp.src('./src/scss/*.scss')
+    return gulp.src('./src/scss/*.scss')  // 切记return
         .pipe(sass())
         .pipe(clean())
         .pipe(gulp.dest('./src/css'))
+})
+
+// 编译js 压缩并合并js
+gulp.task('uglify', function(){
+    return gulp.src(['./src/js/*.js', '!./src/js/*.min.js'])
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))  // 编译
+        .pipe(concat('all.js'))  // 合并
+        .pipe(uglify())  // 压缩
+        .pipe(gulp.dest('./src/jsmin'))
 })
