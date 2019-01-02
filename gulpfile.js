@@ -66,3 +66,10 @@ gulp.task('watch', function(){
 
 //default
 gulp.task('default', gulp.series('uglify', 'sass', 'watch'))
+
+
+// build
+gulp.task('build', function(){
+    return gulp.src(['./src/css/*.css', './src/jsmin/*.js'])
+        .pipe(gulp.dest('dist'))
+})

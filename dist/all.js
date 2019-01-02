@@ -1,0 +1,1 @@
+console.log("index"),console.log("smile"),console.log("shy");
