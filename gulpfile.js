@@ -36,3 +36,11 @@ function serverRun(serverPath){
             }
         }))
 }
+
+//编译sass
+gulp.task('sass', function(){
+    gulp.src('./src/scss/*.scss')
+        .pipe(sass())
+        .pipe(clean())
+        .pipe(gulp.dest('./src/css'))
+})
