@@ -63,3 +63,6 @@ gulp.task('watch', function(){
     gulp.watch('./src/js/*.js', gulp.series('uglify'))
     gulp.watch('./src/scss/*.scss', gulp.series('sass'))
 })
+
+//default
+gulp.task('default', gulp.series('uglify', 'sass', 'watch'))
