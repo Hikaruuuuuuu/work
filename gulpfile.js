@@ -49,10 +49,17 @@ gulp.task('sass', function(){
 // 编译js 压缩并合并js
 gulp.task('uglify', function(){
     return gulp.src(['./src/js/*.js', '!./src/js/*.min.js'])
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))  // 编译
+        // .pipe(babel({
+        //     presets: ['@babel/env']
+        // }))  // 编译
         .pipe(concat('all.js'))  // 合并
         .pipe(uglify())  // 压缩
         .pipe(gulp.dest('./src/jsmin'))
+})
+
+
+//监听 js css 
+gulp.task('watch', function(){
+    gulp.watch('./src/js/*.js', gulp.series('uglify'))
+    gulp.watch('./src/scss/*.scss', gulp.series('sass'))
 })
